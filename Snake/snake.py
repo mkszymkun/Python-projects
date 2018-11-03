@@ -70,38 +70,25 @@ def MoveHead():
 	last_col = current_head_cols[current_head]
 	move = input()
 	if move == 'a':
-		if last_col - 1 >= 0:
-			next_row = last_row
-			next_col = last_col - 1
-		else:
-			playing = False
-			return
+		next_row = last_row
+		next_col = last_col - 1
 	elif move == 'd':
-		if last_col + 1 < size:
-			next_row = last_row
-			next_col = last_col + 1
-		else:
-			playing = False
-			return
+		next_row = last_row
+		next_col = last_col + 1
 	elif move == 'w':
-		if last_row - 1 >= 0:
-			next_row = last_row - 1
-			next_col = last_col
-		else:
-			playing = False
-			return
+		next_row = last_row - 1
+		next_col = last_col
 	elif move == 's':
-		if last_row + 1 < size:
-			next_row = last_row + 1
-			next_col = last_col
-		else:
-			playing = False
-			return
+		next_row = last_row + 1
+		next_col = last_col
 	else:
 		playing = False
 		return
 
-	if board[next_row][next_col] == '*':
+	if next_row < 0 or next_row == size or next_col < 0 or next_col == size:
+		playing = False
+		return
+	elif board[next_row][next_col] == '*':
 		score += 1
 		candy = False
 	elif board[next_row][next_col] == '#':
@@ -154,8 +141,9 @@ while playing:
 		ClearScreen()
 		PrintBoard()
 	MoveHead()
-	MoveTail()
-	ClearScreen()
-	PrintBoard()
+	if playing:
+		MoveTail()
+		ClearScreen()
+		PrintBoard()
 
 print("GAME OVER\nSCORE: {}".format(score))
