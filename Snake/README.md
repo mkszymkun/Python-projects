@@ -1,3 +1,5 @@
+Snake
+
 A simple console Snake game.
 
 Use W/A/S/D to move.
